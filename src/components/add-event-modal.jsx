@@ -4,7 +4,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import format from 'date-fns/format'
 import styled, { withTheme } from "styled-components";
-import { MdAccessTime, MdDelete, MdEvent } from "react-icons/md";
+import { MdDelete, MdEvent } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
 
 import colors from "../colors";
@@ -218,7 +218,6 @@ const AddEventModal = ({
                     </DateContainer>
                     {showTimeInput || hour ? (
                         <DateContainer>
-                            <MdAccessTime color={theme.gray} size="1.5rem" />
                             <SelectTime
                                 onChange={e => setEventModalHour({ payload: e.target.value })}
                                 value={hour}

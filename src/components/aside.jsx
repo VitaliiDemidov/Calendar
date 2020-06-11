@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { func } from "prop-types";
 import { connect } from "react-redux";
 import * as dateFns from "date-fns";
+
 import styled from "styled-components";
+import Swiper from 'react-id-swiper';
+import './swyper.css'
 
 
 import { setNextMonth, setPrevMonth } from "../store/actions";
@@ -14,14 +17,14 @@ const StyledCalendarAside = styled.aside`
   border-bottom: 1px solid ${({ theme }) => theme.lightGray};
   display: flex;
   flex-direction:column;
-  overfolv
-  padding: 2rem 2rem;
+  padding-top:1rem;
   cursor: pointer;
   border-radius: 20px 0px 0px 20px;
 -moz-border-radius: 20px 0px 0px 20px;
 -webkit-border-radius: 20px 0px 0px 20px;
 background-color: blueviolet;
 position: relative;
+overflow:hidden;
 
   ::after {
     position:absolute;
@@ -31,59 +34,63 @@ position: relative;
     background-color: white;
     bottom:50%;
     right: -20%;
-    z-index: 1;
-    border-radius: 55%;
+    z-index: 55;
+    border-radius: 50%;
   }
 
 `;
 const Li = styled.li`
 list-style:none;
-margin:3rem 0;
+margin: 0;
 color:white;
-scroll-snap-align: center;
-  :first-child{
-    margin:0;
-  }
+font-weight:bold;
+
 `
-const ListBox = styled.ul`
-overflow: overlay;
-padding: 0 3rem;
-::-webkit-scrollbar {
-  width: 0px;
+
+const params = {
+  direction: 'vertical',
+  mousewheel: true,
+  slidesPerView: '11',
+  spaceBetween: 20,
+  speed: .50,
+  loop: true,
 }
-`
+
 const CalendarAside = ({
   setNextMonth,
   setPrevMonth,
   currentMonth
 }) => {
+  const [swiper, updateSwiper] = useState(null);
   let result = dateFns.eachMonthOfInterval({
-    start: new Date(2019, 0, 1),
-    end: new Date(2020, 11, 31)
+    start: dateFns.subMonths(new Date(dateFns.startOfToday()), 4),
+    end: dateFns.addMonths(new Date(dateFns.startOfToday()), 7)
   })
-  console.log(result);
+
 
   const month = () => {
     return result.map((item, index) => <Li className={dateFns.format(item, monthFormat)} key={index}>{dateFns.format(item, monthFormat)}</Li>)
   }
-  const getScrollLocations = () => {
-    let whatIDo = document.getElementsByClassName(dateFns.format(currentMonth, monthFormat))
-    // whatIDo.scrollIntoView();
-  }
+
   return (
     <StyledCalendarAside
       onWheel={event => {
         if (event.nativeEvent.wheelDelta > 0) {
-          setPrevMonth()
+
+          swiper.slidePrev(setPrevMonth());
+
         } else {
+          swiper.slideNext(setNextMonth())
 
-          setNextMonth()
+
         }
-      }}
+      }}>
 
-    >
-      <ListBox getScrollLocations={getScrollLocations()}>{month()}</ListBox>
-    </StyledCalendarAside>)
+      <Swiper getSwiper={updateSwiper} {...params}>
+        {month()}
+      </Swiper>
+    </StyledCalendarAside>
+  )
 };
 
 CalendarAside.propTypes = {

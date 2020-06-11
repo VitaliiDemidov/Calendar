@@ -2,14 +2,17 @@ import React from 'react'
 import styled from "styled-components";
 import { connect } from "react-redux";
 
+import BodyAside from './bodyAside.jsx'
+import HeaderRightAside from './headerRightAside.jsx'
+
 const Container = styled.div`
   display: flex;
   flex-direction:column;
-  margin:auto;
-  height: 15vh;
+  height: 100%;
   width: 15vw;
   background-color:#fff;
-  border-radius: 20px;
+  border-bottom-right-radius: 20px;
+
 `;
 
 
@@ -17,7 +20,8 @@ const Container = styled.div`
 const RightAside = () => {
     return (
         <Container>
-
+            <HeaderRightAside />
+            <BodyAside />
         </Container>
     )
 }
@@ -26,7 +30,5 @@ const mapStateToProps = ({ months }) => ({
     currentMonth: months.currentMonth
 });
 
-export default connect(
-    mapStateToProps,
-)(RightAside);
+export default connect(mapStateToProps)(RightAside);
 

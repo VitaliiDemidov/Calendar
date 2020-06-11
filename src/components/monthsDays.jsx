@@ -49,19 +49,12 @@ const EventsOfTheDay = styled.div`
 const Week = styled.div`
   display: flex;
   height: ${({ numberOfWeeks }) => `calc(100% / ${numberOfWeeks})`};
-
-  ${'' /* ${Day}:last-child {
-    border-radius: 0px 20px 20px 20px;
--moz-border-radius: 0px 20px 20px 20px;
--webkit-border-radius: 0px 20px 20px 20px;
-  } */}
-`;
+`
 
 const Month = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-
   ${Week}:last-child {
     border-radius: 0px 20px 20px 20px;
 -moz-border-radius: 0px 20px 20px 20px;
@@ -119,6 +112,7 @@ const DaysOfTheMonth = ({
         const day = dateFns.addDays(startDate, index);
         const isToday = dateFns.isSameDay(day, new Date());
 
+
         const openEditModal = ({ color, date, hour, id, title }) => {
             setEventModalColor({ payload: color });
             setEventModalDay({ payload: date });
@@ -148,8 +142,7 @@ const DaysOfTheMonth = ({
                             <Event
                                 color={event.color}
                                 key={uuidv4()}
-                                onClick={() => openEditModal(event)}
-                            >
+                                onClick={() => openEditModal(event)}>
                                 <span>
                                     {event.hour ? `${event.hour}h · ` : ""}
                                     {event.title}
@@ -167,14 +160,14 @@ const DaysOfTheMonth = ({
             </Day>
         );
     });
-
     return (
         <Month>
             {chunk(allDaysOfTheMonth, daysOfTheWeek).map((week, index, array) => (
-                <Week key={uuidv4()} numberOfWeeks={array.length}>
+                <Week Week key={uuidv4()} numberOfWeeks={array.length} >
                     {week}
                 </Week>
-            ))}
+            ))
+            }
         </Month>
     );
 };
