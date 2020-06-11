@@ -1,16 +1,15 @@
 import React from 'react'
-// import { connect } from "react-redux";
-// import * as dateFns from "date-fns";
+import { connect } from "react-redux";
+import * as dateFns from "date-fns";
 import styled from "styled-components";
 
 const HeaderAside = styled.div`
-position:fixed;
-  padding:0.5rem;
+  padding:1rem 0;
   align-items: center;
   align-items: baseline;
   border-bottom: 1px solid #e5e5e5;
   max-widht:100%;
-  height: 3rem;
+  height: 3.6rem;
 `
 const HeaderDay = styled.h2`
   font-size:1.5rem;
@@ -19,16 +18,19 @@ const HeaderDay = styled.h2`
 `;
 
 
-const HeaderRightAside = () => {
+const HeaderRightAside = ({ currentMonth }) => {
 
     return (
         <HeaderAside>
             <HeaderDay>
-                Fridey, 4
+                {dateFns.format(new Date(), 'eeee co')}
             </HeaderDay>
         </HeaderAside>
     )
 }
 
+const mapStateToProps = ({ months }) => ({
+    currentMonth: months.currentMonth,
+});
 
-export default HeaderRightAside;
+export default connect(mapStateToProps)(HeaderRightAside);
