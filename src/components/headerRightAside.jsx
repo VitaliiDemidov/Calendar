@@ -18,19 +18,22 @@ const HeaderDay = styled.h2`
 `;
 
 
-const HeaderRightAside = ({ currentMonth }) => {
+const HeaderRightAside = ({ day }) => {
+    console.log(day);
 
     return (
         <HeaderAside>
             <HeaderDay>
-                {dateFns.format(new Date(), 'eeee co')}
+                {dateFns.format(day, 'eeee io')}
             </HeaderDay>
         </HeaderAside>
     )
 }
 
-const mapStateToProps = ({ months }) => ({
+
+const mapStateToProps = ({ months, eventModal }) => ({
     currentMonth: months.currentMonth,
+    day: eventModal.day
 });
 
 export default connect(mapStateToProps)(HeaderRightAside);
