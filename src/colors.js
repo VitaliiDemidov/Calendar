@@ -8,16 +8,8 @@ const colors = [
         title: "red"
     },
     {
-        hex: "#f76c27",
-        title: "orange"
-    },
-    {
-        hex: "#e7e737",
-        title: "lime"
-    },
-    {
-        hex: "#7e45d3",
-        title: "purple"
+        hex: "#297F13",
+        title: "green"
     }
 ];
 

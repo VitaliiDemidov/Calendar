@@ -6,7 +6,7 @@ import * as dateFns from "date-fns";
 import styled, { withTheme } from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import chunk from "lodash/chunk";
-import { MdClose } from "react-icons/md";
+
 
 import colors from "../colors";
 import {
@@ -22,9 +22,11 @@ import {
 const dayFormat = "d";
 const daysOfTheWeek = 7;
 
-const Close = styled(MdClose)`
-  cursor: pointer;
-`;
+const Circle = styled.div`
+height: .4rem;
+width: .4rem;
+margin:.3rem;
+`
 
 const Day = styled.div`
   border: 1px solid ${({ theme }) => theme.lightGray};
@@ -143,17 +145,8 @@ const DaysOfTheMonth = ({
                                 color={event.color}
                                 key={uuidv4()}
                                 onClick={() => openEditModal(event)}>
-                                <span>
-                                    {event.hour ? `${event.hour}h · ` : ""}
-                                    {event.title}
-                                </span>
-                                <Close
-                                    color={theme.white}
-                                    onClick={e => {
-                                        e.stopPropagation();
-                                        removeEvent({ payload: event.id });
-                                    }}
-                                />
+                                <Circle>
+                                </Circle>
                             </Event>
                         ))}
                 </EventsOfTheDay>

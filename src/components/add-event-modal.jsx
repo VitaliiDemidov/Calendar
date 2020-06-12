@@ -98,7 +98,7 @@ const Input = styled.input`
   border-right: 0;
   border-top: 0;
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: bold;
   display: block;
   margin: 1rem 0 1px 0;
   padding: 0.125rem;
@@ -207,7 +207,7 @@ const AddEventModal = ({
                     autoFocus
                     maxLength={24}
                     onChange={e => setEventModalTitle({ payload: e.target.value })}
-                    placeholder="Add title"
+                    placeholder="Title"
                     required
                     value={title}
                 />

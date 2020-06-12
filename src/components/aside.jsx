@@ -5,7 +5,7 @@ import * as dateFns from "date-fns";
 
 import styled from "styled-components";
 import Swiper from 'react-id-swiper';
-import './swyper.css'
+import './swiper.css'
 
 
 import { setNextMonth, setPrevMonth } from "../store/actions";
